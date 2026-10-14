@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Max's Science Vocabulary Challenge</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231565c0'/%3E%3Cpath d='M32 48V30' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M32 36c-10-2-14-12-14-18 9 1 15 7 14 18z' fill='%23b7f0c8'/%3E%3Cpath d='M32 33c9-1 16-9 18-17-9 0-16 6-18 17z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <svg class="hero-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="rgba(255,255,255,0.16)"></circle>
+        <path d="M32 48V28" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M32 36c-10-2-15-12-14-19 10 1 16 8 14 19z" fill="#b7f0c8"></path>
+        <path d="M32 32c9-1 16-9 18-17-9 0-16 6-18 17z" fill="#fff"></path>
+      </svg>
+      <div>
+        <h1>Max's Science Vocabulary Challenge</h1>
+        <p class="subtitle">5th Grade Science — Learn, Spell &amp; Practice</p>
+      </div>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Practice sections">
+      <button type="button" class="tab" id="tab-study" role="tab" aria-selected="true" aria-controls="panel-study" tabindex="0">Study Mode</button>
+      <button type="button" class="tab" id="tab-spell" role="tab" aria-selected="false" aria-controls="panel-spell" tabindex="-1">Spelling Challenge</button>
+    </div>
+
+    <main>
+      <section id="panel-study" role="tabpanel" aria-labelledby="tab-study">
+        <div class="panel-card">
+          <div class="panel-toolbar">
+            <h2>Learn the Words</h2>
+            <div class="toolbar-actions">
+              <button type="button" class="btn btn-secondary" id="hide-words" aria-pressed="false">Hide Words</button>
+              <button type="button" class="btn btn-secondary is-active" id="show-words" aria-pressed="true">Show Words</button>
+            </div>
+          </div>
+          <p class="instructions">Read each word and its definition. Hide the words when you want to study from the definitions alone.</p>
+          <p id="speech-note" class="speech-note" role="status"></p>
+          <div id="study-grid" class="study-grid"></div>
+        </div>
+      </section>
+
+      <section id="panel-spell" role="tabpanel" aria-labelledby="tab-spell" hidden>
+        <div class="reset-row">
+          <button type="button" class="btn btn-secondary" id="retry-incorrect">Retry Incorrect Words</button>
+          <button type="button" class="btn btn-secondary" id="start-new">Start New Practice</button>
+        </div>
+
+        <div class="panel-card tracker" aria-live="polite">
+          <h2>Spelling Challenge</h2>
+          <p class="instructions">Type the vocabulary word that matches each definition. Capital letters do not matter. Spaces at the very beginning or end do not matter. The spelling does.</p>
+          <div class="stat-grid">
+            <p class="stat-line">Correct Answers: <strong id="correct-count">0/9</strong></p>
+            <p class="stat-line">Words Remaining: <strong id="remaining-count">9</strong></p>
+            <p class="stat-line">Total Incorrect Attempts: <strong id="incorrect-count">0</strong></p>
+          </div>
+          <div class="progress-track" id="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0" aria-label="Correct answers">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <section id="celebration" class="celebration" hidden>
+          <div class="confetti" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <h2>Outstanding work, Max! You completed all 9 science vocabulary words!</h2>
+          <ul class="final-stats">
+            <li id="final-correct">Total correct: 9/9</li>
+            <li id="final-incorrect">Total incorrect attempts: 0</li>
+            <li id="final-accuracy">Accuracy: 100%</li>
+          </ul>
+          <p class="accuracy-note">Accuracy is your correct answers divided by every answer you checked.</p>
+          <h3>Words to Practice</h3>
+          <ul id="practice-list" class="practice-list"></ul>
+          <button type="button" class="btn btn-primary" id="practice-again">Practice Again</button>
+        </section>
+
+        <div id="challenge-list" class="challenge-list"></div>
+      </section>
+    </main>
+
+    <noscript>
+      <p class="noscript">This practice page needs JavaScript enabled in your browser.</p>
+    </noscript>
+  </div>
+
+  <div id="confirm-modal" class="modal" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-text">
+      <h2 id="modal-title">Start a new practice?</h2>
+      <p id="modal-text">This round is not finished. Starting over will clear your score and shuffle every definition.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="modal-keep">Keep Working</button>
+        <button type="button" class="btn btn-primary" id="modal-reset">Start New Practice</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
